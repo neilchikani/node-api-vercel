@@ -33,7 +33,7 @@ app.use(helmet());
 app.use(cors());
 
 // mount all routes on /api path
-// app.use("/api", routes);
+app.use("/api", routes);
 
 app.get("/", (req, res) => {
   res.send("Hey this is my API running 🥳");
