@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const httpStatus = require("http-status");
 const User = require("../user/user.model");
 const APIError = require("../../helpers/APIError");
-// const config = require("../../config");
 
 /**
  * Returns jwt token and user details if valid email and password are provided
