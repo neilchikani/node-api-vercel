@@ -35,7 +35,7 @@ router.get("/health-check", (req, res) => res.send("OK"));
 // );
 
 // // mount user routes at /users
-// router.use("/users", userRoutes);
+router.use("/users", userRoutes);
 
 // // mount book routes at /books
 // router.use("/books", bookRoutes);
