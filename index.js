@@ -7,7 +7,7 @@ const cors = require("cors");
 const httpStatus = require("http-status");
 const { ValidationError } = require("express-validation");
 const helmet = require("helmet");
-// const routes = require("./routes");
+const routes = require("./src/routes");
 // const APIError = require("./helpers/APIError");
 
 const app = express();
@@ -28,40 +28,28 @@ app.use(cors());
 
 const PORT = 4000;
 
-app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `);
-});
-
-app.get("/", (req, res) => {
-  res.send("Hey this is my API running 🥳");
-});
-
-app.get("/about", (req, res) => {
-  res.send("This is my about route..... ");
-});
-
 // mount all routes on /api path
-// app.use("/api", routes);
+app.use("/api", routes);
 
-// // if error is not an instanceOf APIError, convert it.
-// app.use((err, req, res, next) => {
-//   if (err instanceof ValidationError) {
-//     // validation error contains details object which has error message attached to error property.
-//     const allErrors = err.details.map((pathErrors) =>
-//       Object.values(pathErrors).join(", ")
-//     );
-//     const unifiedErrorMessage = allErrors
-//       .join(", ")
-//       .replace(/, ([^,]*)$/, " and $1");
-//     const error = new APIError(unifiedErrorMessage, err.statusCode);
-//     return next(error);
-//   }
-//   if (!(err instanceof APIError)) {
-//     const apiError = new APIError(err.message, err.status);
-//     return next(apiError);
-//   }
-//   return next(err);
-// });
+// if error is not an instanceOf APIError, convert it.
+app.use((err, req, res, next) => {
+  if (err instanceof ValidationError) {
+    // validation error contains details object which has error message attached to error property.
+    const allErrors = err.details.map((pathErrors) =>
+      Object.values(pathErrors).join(", ")
+    );
+    const unifiedErrorMessage = allErrors
+      .join(", ")
+      .replace(/, ([^,]*)$/, " and $1");
+    const error = new APIError(unifiedErrorMessage, err.statusCode);
+    return next(error);
+  }
+  if (!(err instanceof APIError)) {
+    const apiError = new APIError(err.message, err.status);
+    return next(apiError);
+  }
+  return next(err);
+});
 
 // // catch 404 and forward to error handler
 // app.use((req, res, next) => {
@@ -69,8 +57,8 @@ app.get("/about", (req, res) => {
 //   return next(err);
 // });
 
-// app.get("/", (req, res) => {
-//   res.send("Hey this is my API running 🥳");
-// });
+app.listen(PORT, () => {
+  console.log(`API listening on PORT ${PORT} `);
+});
 
 module.exports = app;
