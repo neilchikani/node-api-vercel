@@ -27,32 +27,36 @@ app.use(helmet());
 app.use(cors());
 
 // mount all routes on /api path
-app.use("/api", routes);
+// app.use("/api", routes);
 
-// if error is not an instanceOf APIError, convert it.
-app.use((err, req, res, next) => {
-  if (err instanceof ValidationError) {
-    // validation error contains details object which has error message attached to error property.
-    const allErrors = err.details.map((pathErrors) =>
-      Object.values(pathErrors).join(", ")
-    );
-    const unifiedErrorMessage = allErrors
-      .join(", ")
-      .replace(/, ([^,]*)$/, " and $1");
-    const error = new APIError(unifiedErrorMessage, err.statusCode);
-    return next(error);
-  }
-  if (!(err instanceof APIError)) {
-    const apiError = new APIError(err.message, err.status);
-    return next(apiError);
-  }
-  return next(err);
-});
+// // if error is not an instanceOf APIError, convert it.
+// app.use((err, req, res, next) => {
+//   if (err instanceof ValidationError) {
+//     // validation error contains details object which has error message attached to error property.
+//     const allErrors = err.details.map((pathErrors) =>
+//       Object.values(pathErrors).join(", ")
+//     );
+//     const unifiedErrorMessage = allErrors
+//       .join(", ")
+//       .replace(/, ([^,]*)$/, " and $1");
+//     const error = new APIError(unifiedErrorMessage, err.statusCode);
+//     return next(error);
+//   }
+//   if (!(err instanceof APIError)) {
+//     const apiError = new APIError(err.message, err.status);
+//     return next(apiError);
+//   }
+//   return next(err);
+// });
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new APIError("API Not Found", httpStatus.NOT_FOUND);
-  return next(err);
+// // catch 404 and forward to error handler
+// app.use((req, res, next) => {
+//   const err = new APIError("API Not Found", httpStatus.NOT_FOUND);
+//   return next(err);
+// });
+
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
 });
 
 module.exports = app;
