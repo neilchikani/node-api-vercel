@@ -12,6 +12,10 @@ const routes = require("./src/routes");
 
 const app = express();
 
+app.listen(PORT, () => {
+  console.log(`API listening on PORT ${PORT} `);
+});
+
 // parse body params and attache them to req.body
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,9 +46,5 @@ app.get("/", (req, res) => {
 //   const err = new APIError("API Not Found", httpStatus.NOT_FOUND);
 //   return next(err);
 // });
-
-app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `);
-});
 
 module.exports = app;
