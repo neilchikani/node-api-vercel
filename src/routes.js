@@ -1,9 +1,9 @@
 const express = require("express");
 const expressJwt = require("express-jwt");
-const config = require("./config");
-const userRoutes = require("./modules/user/user.routes");
-const authRoutes = require("./modules/auth/auth.routes");
-const bookRoutes = require("./modules/book/book.routes");
+// const config = require("./config");
+// const userRoutes = require("./modules/user/user.routes");
+// const authRoutes = require("./modules/auth/auth.routes");
+// const bookRoutes = require("./modules/book/book.routes");
 
 const router = express.Router();
 
