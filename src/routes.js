@@ -2,7 +2,7 @@ const express = require("express");
 const expressJwt = require("express-jwt");
 // const config = require("./config");
 // const userRoutes = require("./modules/user/user.routes");
-// const authRoutes = require("./modules/auth/auth.routes");
+const authRoutes = require("./modules/auth/auth.routes");
 // const bookRoutes = require("./modules/book/book.routes");
 
 const router = express.Router();
@@ -11,7 +11,7 @@ const router = express.Router();
 router.get("/health-check", (req, res) => res.send("OK"));
 
 // mount auth routes at /auth
-// router.use("/auth", authRoutes);
+router.use("/auth", authRoutes);
 
 // // Validating all the APIs with jwt token.
 // router.use(

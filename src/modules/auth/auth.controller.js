@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const httpStatus = require("http-status");
 const User = require("../user/user.model");
 const APIError = require("../../helpers/APIError");
-const config = require("../../config");
+// const config = require("../../config");
 
 /**
  * Returns jwt token and user details if valid email and password are provided
@@ -61,7 +61,7 @@ async function register(req, res, next) {
  * @param {*} payload - Payload to be signed in JWT
  */
 function generateJWT(payload) {
-  return jwt.sign(payload, config.jwtSecret, {
+  return jwt.sign(payload, "Nilay", {
     expiresIn: "1440",
     algorithm: "HS256",
   });
