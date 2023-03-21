@@ -3,7 +3,7 @@ const util = require("util");
 const debug = require("debug")("node-server:index");
 
 // config should be imported before importing any other file
-const config = require("./src/config");
+// const config = require("./src/config");
 const server = require("./src/server");
 
 // make bluebird default Promise
@@ -28,18 +28,18 @@ mongoose.connection.on("error", () => {
 });
 
 // print mongoose logs in dev env
-if (config.mongooseDebug) {
-  mongoose.set("debug", (collectionName, method, query, doc) => {
-    debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
-  });
-}
+// if (config.mongooseDebug) {
+//   mongoose.set("debug", (collectionName, method, query, doc) => {
+//     debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
+//   });
+// }
 
 // module.parent check is required to support mocha watch
 // src: https://github.com/mochajs/mocha/issues/1912
 if (!module.parent) {
   // listen on port config.port
-  server.listen(config.port, () => {
-    debug(`server started on port ${config.port} (${config.env})`);
+  server.listen("4000", () => {
+    debug("server started on port 4000");
   });
 }
 
