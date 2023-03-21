@@ -13,18 +13,18 @@ const routes = require("./src/routes");
 const app = express();
 
 // parse body params and attache them to req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser());
-app.use(compress());
-app.use(methodOverride());
+// app.use(cookieParser());
+// app.use(compress());
+// app.use(methodOverride());
 
-// secure apps by setting various HTTP headers
-app.use(helmet());
+// // secure apps by setting various HTTP headers
+// app.use(helmet());
 
-// enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+// // enable CORS - Cross Origin Resource Sharing
+// app.use(cors());
 
 const PORT = 4000;
 
@@ -32,24 +32,6 @@ const PORT = 4000;
 app.use("/api", routes);
 
 // if error is not an instanceOf APIError, convert it.
-app.use((err, req, res, next) => {
-  if (err instanceof ValidationError) {
-    // validation error contains details object which has error message attached to error property.
-    const allErrors = err.details.map((pathErrors) =>
-      Object.values(pathErrors).join(", ")
-    );
-    const unifiedErrorMessage = allErrors
-      .join(", ")
-      .replace(/, ([^,]*)$/, " and $1");
-    const error = new APIError(unifiedErrorMessage, err.statusCode);
-    return next(error);
-  }
-  if (!(err instanceof APIError)) {
-    const apiError = new APIError(err.message, err.status);
-    return next(apiError);
-  }
-  return next(err);
-});
 
 // // catch 404 and forward to error handler
 // app.use((req, res, next) => {
