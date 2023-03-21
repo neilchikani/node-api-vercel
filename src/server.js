@@ -55,8 +55,8 @@ app.use(cors());
 //   return next(err);
 // });
 
-app.get("/", (req, res) => {
-  res.send("Hey this is my API running 🥳");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hey this is my API running 🥳");
+// });
 
 module.exports = app;
