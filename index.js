@@ -12,6 +12,8 @@ const routes = require("./src/routes");
 
 const app = express();
 
+const PORT = 4000;
+
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);
 });
@@ -29,8 +31,6 @@ app.listen(PORT, () => {
 
 // // enable CORS - Cross Origin Resource Sharing
 // app.use(cors());
-
-const PORT = 4000;
 
 // mount all routes on /api path
 // app.use("/api", routes);
