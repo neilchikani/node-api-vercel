@@ -1,13 +1,13 @@
 const express = require("express");
-// const bodyParser = require("body-parser");
-// const cookieParser = require("cookie-parser");
-// const compress = require("compression");
-// const methodOverride = require("method-override");
-// const cors = require("cors");
-// const httpStatus = require("http-status");
-// const { ValidationError } = require("express-validation");
-// const helmet = require("helmet");
-// const routes = require("./src/routes");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const compress = require("compression");
+const methodOverride = require("method-override");
+const cors = require("cors");
+const httpStatus = require("http-status");
+const { ValidationError } = require("express-validation");
+const helmet = require("helmet");
+const routes = require("./src/routes");
 // const APIError = require("./helpers/APIError");
 
 const app = express();
