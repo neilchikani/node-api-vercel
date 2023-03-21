@@ -13,7 +13,8 @@ Promise = require("bluebird"); // eslint-disable-line no-global-assign
 mongoose.Promise = Promise;
 
 // connect to mongo db
-const mongoUri = config.mongo.host;
+const mongoUri =
+  "mongodb+srv://chikaninilay:Vardhman1411@sadharmik-database.phwj3pu.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUri, {
   useCreateIndex: true,
   useNewUrlParser: true,
