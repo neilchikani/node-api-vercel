@@ -29,7 +29,11 @@ const app = express();
 const PORT = 4000;
 
 // mount all routes on /api path
-app.use("/api", routes);
+// app.use("/api", routes);
+
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
 
 // if error is not an instanceOf APIError, convert it.
 
