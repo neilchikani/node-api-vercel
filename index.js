@@ -7,7 +7,7 @@ const cors = require("cors");
 const httpStatus = require("http-status");
 const { ValidationError } = require("express-validation");
 const helmet = require("helmet");
-// const routes = require("./src/routes");
+const routes = require("./src/routes");
 // const APIError = require("./helpers/APIError");
 
 const app = express();
