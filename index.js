@@ -1,20 +1,60 @@
-// index.js
-const express = require("express");
+const mongoose = require("mongoose");
+const util = require("util");
+const debug = require("debug")("node-server:index");
 
-const app = express();
+// config should be imported before importing any other file
+// const config = require("./src/config");
+const server = require("./src/server");
+
+// // make bluebird default Promise
+// Promise = require("bluebird"); // eslint-disable-line no-global-assign
+
+// // plugin bluebird promise in mongoose
+// mongoose.Promise = Promise;
+
+// // connect to mongo db
+// const mongoUri =
+//   "mongodb+srv://chikaninilay:Vardhman1411@sadharmik-database.phwj3pu.mongodb.net/?retryWrites=true&w=majority";
+// mongoose.connect(mongoUri, {
+//   useCreateIndex: true,
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   promiseLibrary: Promise,
+//   useFindAndModify: false,
+// });
+
+// mongoose.connection.on("error", () => {
+//   throw new Error(`unable to connect to database: ${mongoUri}`);
+// });
+
+// // print mongoose logs in dev env
+// // if (config.mongooseDebug) {
+// //   mongoose.set("debug", (collectionName, method, query, doc) => {
+// //     debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
+// //   });
+// // }
+
+// // module.parent check is required to support mocha watch
+// // src: https://github.com/mochajs/mocha/issues/1912
+// if (!module.parent) {
+//   // listen on port config.port
+//   server.listen("4000", () => {
+//     debug("server started on port 4000");
+//   });
+// }
+
 const PORT = 4000;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `);
 });
 
-app.get("/", (req, res) => {
+server.get("/", (req, res) => {
   res.send("Hey this is my API running 🥳");
 });
 
-app.get("/about", (req, res) => {
+server.get("/about", (req, res) => {
   res.send("This is my about route..... ");
 });
 
-// Export the Express API
-module.exports = app;
+module.exports = server;
