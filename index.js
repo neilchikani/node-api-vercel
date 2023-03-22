@@ -1,19 +1,21 @@
-const mongoose = require('mongoose');
-const util = require('util');
-const debug = require('debug')('node-server:index');
+const mongoose = require("mongoose");
+const util = require("util");
+
+const debug = require("debug")("node-server:index");
 
 // config should be imported before importing any other file
-const config = require('./src/config');
-const server = require('./src/server');
+const config = require("./src/config");
+const server = require("./src/server");
 
 // make bluebird default Promise
-Promise = require('bluebird'); // eslint-disable-line no-global-assign
+Promise = require("bluebird"); // eslint-disable-line no-global-assign
 
 // plugin bluebird promise in mongoose
 mongoose.Promise = Promise;
 
 // connect to mongo db
-const mongoUri = config.mongo.host;
+const mongoUri =
+  "mongodb+srv://chikaninilay:Vardhman1411@sadharmik-database.phwj3pu.mongodb.net/data?retryWrites=true&w=majority";
 mongoose.connect(mongoUri, {
   useCreateIndex: true,
   useNewUrlParser: true,
@@ -22,13 +24,13 @@ mongoose.connect(mongoUri, {
   useFindAndModify: false,
 });
 
-mongoose.connection.on('error', () => {
+mongoose.connection.on("error", () => {
   throw new Error(`unable to connect to database: ${mongoUri}`);
 });
 
 // print mongoose logs in dev env
 if (config.mongooseDebug) {
-  mongoose.set('debug', (collectionName, method, query, doc) => {
+  mongoose.set("debug", (collectionName, method, query, doc) => {
     debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
   });
 }
