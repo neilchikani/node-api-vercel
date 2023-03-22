@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const Book = require('./book.model');
-const APIError = require('../../helpers/APIError');
+const httpStatus = require("http-status");
+const Book = require("./book.model");
+const APIError = require("../../helpers/APIError");
 
 /**
  * Load book and append to req.
@@ -32,14 +32,8 @@ function get(req, res) {
  */
 async function create(req, res, next) {
   const book = new Book(req.body);
-  const owner = res.locals.session._id;
-  book.owner = owner;
 
   try {
-    const foundBook = await Book.findOne({ bookName: book.bookName, owner }).exec();
-    if (foundBook) {
-      throw new APIError('Book name must be unique', httpStatus.CONFLICT, true);
-    }
     const savedBook = await book.save();
     return res.json(savedBook);
   } catch (error) {
