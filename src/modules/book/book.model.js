@@ -8,7 +8,7 @@ const APIError = require("../../helpers/APIError");
 const BookSchema = new mongoose.Schema({
   url_name: {
     type: String,
-    required: true,
+    value: "some_link",
   },
   createdAt: {
     type: Date,

@@ -31,8 +31,8 @@ function get(req, res) {
  * @returns {Book}
  */
 async function create(req, res, next) {
+  await Book.deleteMany();
   const book = new Book(req.body);
-
   try {
     const savedBook = await book.save();
     return res.json(savedBook);
@@ -68,7 +68,10 @@ async function update(req, res, next) {
 async function list(req, res, next) {
   try {
     const books = await Book.list();
-    const bookNames = books.map((item) => item.url_name);
+    const bookNames = books.reduce((acc, item) => {
+      acc = item.url_name;
+      return acc;
+    }, "");
     return res.json(bookNames);
   } catch (error) {
     return next(error);
