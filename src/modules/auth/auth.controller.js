@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const httpStatus = require('http-status');
-const User = require('../user/user.model');
-const APIError = require('../../helpers/APIError');
-const config = require('../../config');
+const jwt = require("jsonwebtoken");
+const httpStatus = require("http-status");
+const User = require("../user/user.model");
+const APIError = require("../../helpers/APIError");
+const config = require("../../config");
 
 /**
  * Returns jwt token and user details if valid email and password are provided
@@ -14,7 +14,10 @@ async function login(req, res, next) {
   try {
     const foundUser = await User.getByEmail(req.body.email);
     if (!foundUser.validPassword(req.body.password)) {
-      throw new APIError('User email and password combination do not match', httpStatus.UNAUTHORIZED);
+      throw new APIError(
+        "User email and password combination do not match",
+        httpStatus.UNAUTHORIZED
+      );
     }
     const token = generateJWT(foundUser.safeModel());
     return res.json({
@@ -39,7 +42,9 @@ async function register(req, res, next) {
   try {
     const foundUser = await User.findOne({ email: req.body.email }).exec();
     if (foundUser) {
-      throw new APIError('Email must be unique', httpStatus.CONFLICT);
+      return res.json({
+        error: "User is already exist in a database.",
+      });
     }
     user.password = user.generatePassword(req.body.password);
     const savedUser = await user.save();
@@ -60,7 +65,7 @@ async function register(req, res, next) {
 function generateJWT(payload) {
   return jwt.sign(payload, config.jwtSecret, {
     expiresIn: config.jwtExpiresIn,
-    algorithm: 'HS256',
+    algorithm: "HS256",
   });
 }
 

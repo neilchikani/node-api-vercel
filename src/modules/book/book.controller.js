@@ -68,7 +68,8 @@ async function update(req, res, next) {
 async function list(req, res, next) {
   try {
     const books = await Book.list();
-    return res.json(books);
+    const bookNames = books.map((item) => item.url_name);
+    return res.json(bookNames);
   } catch (error) {
     return next(error);
   }
