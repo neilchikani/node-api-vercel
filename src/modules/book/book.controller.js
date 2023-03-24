@@ -70,8 +70,10 @@ async function list(req, res, next) {
     const books = await Book.list();
     const bookNames = books.reduce((acc, item) => {
       acc = item.url_name;
-      return acc;
-    }, "");
+      return {
+        url_name: acc,
+      };
+    }, {});
     return res.json(bookNames);
   } catch (error) {
     return next(error);
