@@ -64,7 +64,7 @@ async function register(req, res, next) {
  */
 function generateJWT(payload) {
   return jwt.sign(payload, config.jwtSecret, {
-    expiresIn: config.jwtExpiresIn,
+    expiresIn: "365d",
     algorithm: "HS256",
   });
 }
